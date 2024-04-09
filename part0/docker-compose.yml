@@ -13,15 +13,6 @@ services:
       - "8080:80"
 
 
-  go-service2:
-    image: go-service:latest
-    container_name: go-service1
-    networks:
-      - public
-    build:
-      context: services/go-service/.
-    ports:
-      - "8085:80"
       
   python-service:
     image: python-service:latest
