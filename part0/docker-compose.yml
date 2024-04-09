@@ -12,15 +12,6 @@ services:
     ports:
       - "8080:80"
 
-  go-service1:
-    image: go-service:latest
-    container_name: go-service1
-    networks:
-      - public
-    build:
-      context: services/go-service/.
-    ports:
-      - "8083:80"
 
   go-service2:
     image: go-service:latest
