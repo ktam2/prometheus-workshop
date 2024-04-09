@@ -5,7 +5,6 @@ import (
   "log"
   "math/rand"
   "net/http"
-  "strconv"
   "time"
 
   "github.com/go-chi/chi"
@@ -17,19 +16,6 @@ import (
 )
 
 var responseCodes [3]int
-var (
- pongCount = prometheus.NewCounterVec(
-  prometheus.CounterOpts{
-   Name: "ping_total_number_of_requests",
-   Help: "Number of ping requests.",
-  },
-  []string{"status"},
- )
-)
-
-func initPrometheusMetric() {
- prometheus.MustRegister(pongCount)
-}
 
 func pong(w http.ResponseWriter, r *http.Request) {
   response := make(map[string]string)
@@ -38,7 +24,7 @@ func pong(w http.ResponseWriter, r *http.Request) {
   rand.Seed(time.Now().Unix())
 
   responseCode := responseCodes[rand.Intn(len(responseCodes))]
-  pongCount.WithLabelValues(strconv.Itoa(responseCode)).Inc()
+
   render.Status(r, responseCode)
 
   render.JSON(w, r, response)
@@ -82,7 +68,6 @@ func initResponseCodes() {
 
 func main() {
   initResponseCodes()
-    initPrometheusMetric()
   router := Routes()
   port := 80
 
