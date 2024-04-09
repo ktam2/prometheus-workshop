@@ -37,3 +37,8 @@ scrape_configs:
 
     static_configs:
       - targets: ['dotnet-service']
+
+  - job_name: 'python-service'
+
+    static_configs:
+      - targets: ['python-service']
