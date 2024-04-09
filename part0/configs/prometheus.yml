@@ -42,3 +42,13 @@ scrape_configs:
 
     static_configs:
       - targets: ['python-service']
+      
+  - job_name: 'go-service2'
+
+    static_configs:
+      - targets: ['go-service']
+
+  - job_name: 'dotnet-service2'
+
+    static_configs:
+      - targets: ['dotnet-service']
